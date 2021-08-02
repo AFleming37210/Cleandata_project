@@ -8,6 +8,7 @@ pathdata = file.path("C:/Users/flemina4/OneDrive - Lincoln University/2021/Rcour
 files = list.files(pathdata, recursive = TRUE)
 files
 #Reading train tables
+
 xtrain = read.table(file.path(pathdata, "train", "X_train.txt"),header = FALSE)
 ytrain = read.table(file.path(pathdata, "train", "y_train.txt"),header = FALSE)
 subject_train = read.table(file.path(pathdata, "train", "subject_train.txt"),header = FALSE)
@@ -45,3 +46,4 @@ setWithActivityNames = merge(setForMeanAndStd, activityLabels, by = 'activityId'
 secTidySet <- aggregate(. ~ subjectId + activityId, setWithActivityNames, mean)
 secTidySet <- secTidySet[order(secTidySet$subjectId, secTidySet$activityId),]
 write.table(secTidySet, "secTidySet.txt", row.name = FALSE)
+
