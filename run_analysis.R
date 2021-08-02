@@ -2,6 +2,8 @@
 setwd("C:/Users/flemina4/OneDrive - Lincoln University/2021/Rcourse/Cleandata_project")
 URL <-  "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"  
 download.file(URL, destfile = "C:/Users/flemina4/OneDrive - Lincoln University/2021/Rcourse/Cleandata_project/Dataset.zip", mode = 'wb')
+unzip(zipfile = "C:/Users/flemina4/OneDrive - Lincoln University/2021/Rcourse/Cleandata_project/Dataset.zip", exdir = "C:/Users/flemina4/OneDrive - Lincoln University/2021/Rcourse/Cleandata_project")
+##define path where folder has been unzipped###
 pathdata = file.path("C:/Users/flemina4/OneDrive - Lincoln University/2021/Rcourse/Cleandata_project", "UCI HAR Dataset")
 files = list.files(pathdata, recursive = TRUE)
 files
@@ -38,7 +40,7 @@ meand_and_sd = (grepl("activityId", colNames) | grepl("subjectId", colNames) | g
 setForMeanAndStd <- setAllInOne[, meand_and_sd == TRUE]
 ####3 Name the activity names####
 setWithActivityNames = merge(setForMeanAndStd, activityLabels, by = 'activityId', all.x = TRUE)
-
+###step 4 labeling data set with descriptive vcariables already completed above###
 ####5 from each data set in 4, create a second tidy data set with mean of each variable for each activity and subject#### 
 secTidySet <- aggregate(. ~ subjectId + activityId, setWithActivityNames, mean)
 secTidySet <- secTidySet[order(secTidySet$subjectId, secTidySet$activityId),]
