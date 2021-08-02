@@ -8,7 +8,6 @@ pathdata = file.path("C:/Users/flemina4/OneDrive - Lincoln University/2021/Rcour
 files = list.files(pathdata, recursive = TRUE)
 files
 #Reading train tables
-
 xtrain = read.table(file.path(pathdata, "train", "X_train.txt"),header = FALSE)
 ytrain = read.table(file.path(pathdata, "train", "y_train.txt"),header = FALSE)
 subject_train = read.table(file.path(pathdata, "train", "subject_train.txt"),header = FALSE)
@@ -43,7 +42,6 @@ setForMeanAndStd <- setAllInOne[, meand_and_sd == TRUE]
 setWithActivityNames = merge(setForMeanAndStd, activityLabels, by = 'activityId', all.x = TRUE)
 ###step 4 labeling data set with descriptive vcariables already completed above###
 ####5 from each data set in 4, create a second tidy data set with mean of each variable for each activity and subject#### 
-secTidySet <- aggregate(. ~ subjectId + activityId, setWithActivityNames, mean)
-secTidySet <- secTidySet[order(secTidySet$subjectId, secTidySet$activityId),]
-write.table(secTidySet, "secTidySet.txt", row.name = FALSE)
-
+TidySet <- aggregate(. ~ subjectId + activityId, setWithActivityNames, mean)
+TidySet <- TidySet[order(TidySet$subjectId, TidySet$activityId),]
+write.table(TidySet, "TidySet.txt", row.name = FALSE)
